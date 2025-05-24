@@ -6,3 +6,5 @@
 
 #### Added
  - Update **WinGet**.
+ - Add support for *wix* installer.
+ - Add cross-platform **PowerShell**..
