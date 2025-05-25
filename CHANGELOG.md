@@ -6,6 +6,7 @@
 
 #### Added
 - Add **Microsoft.WinGet.Client**.
+- Add **PowerShell profile**.
 
 ### 5/24/2025 - Init repo
 

@@ -1,7 +1,7 @@
 function Test-IsProcessElevated {
-  $identity = [System.Security.Principal.WindowsIdentity]::GetCurrent()
-  $principal = [System.Security.Principal.WindowsPrincipal]$identity
-  $principal.IsInRole([System.Security.Principal.WindowsBuiltInRole]::Administrator)
+  $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
+  $principal = [Security.Principal.WindowsPrincipal]$identity
+  $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 }
 
 function Test-IsCommandAvailable {
@@ -13,10 +13,37 @@ function Test-IsCommandAvailable {
   [Boolean](Get-Command $Name -ErrorAction SilentlyContinue)
 }
 
+function Test-IsSymbolicLink {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory)]
+        [String] $Path
+    )
+    [Boolean]((Test-Path $Path) -and (Get-ItemProperty $Path).LinkType)
+}
+
+function Test-IsDirectory {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory)]
+        [String] $Path
+    )
+    Test-Path -Path $Path -PathType Container
+}
+
+function Test-IsFile {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory)]
+        [String] $Path
+    )
+    Test-Path -Path $Path -PathType Leaf
+}
+
 function Restore-EnvPath {
   $env:Path = @(
-    [System.Environment]::GetEnvironmentVariable('Path', 'Machine'),
-    [System.Environment]::GetEnvironmentVariable('Path', 'User')
+    [Environment]::GetEnvironmentVariable('Path', 'Machine'),
+    [Environment]::GetEnvironmentVariable('Path', 'User')
   ) -join ';'
 }
 
