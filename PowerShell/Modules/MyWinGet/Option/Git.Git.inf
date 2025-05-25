@@ -1,0 +1,9 @@
+[Setup]
+Components=ext,ext\shellhere,gitlfs,windowsterminal,scalar
+DefaultBranchOption=main
+SSHOption=ExternalOpenSSH
+CURLOption=WinSSL
+CRLFOption=LFOnly
+GitPullBehaviorOption=FFOnly
+PerformanceTweaksFSCache=Enabled
+EnableSymlinks=Enabled

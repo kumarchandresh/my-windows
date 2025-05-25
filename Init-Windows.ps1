@@ -42,6 +42,10 @@ return
 Write-Host '👉 Install Windows Terminal' -ForegroundColor Blue
 Install-MyWinGetPackage -Id Microsoft.WindowsTerminal
 
+# https://gitforwindows.org/
+Write-Host '👉 Install Git for Windows' -ForegroundColor Blue
+Install-MyWinGetPackage -Scope Machine Git.Git; Restore-EnvPath
+
 # https://github.com/microsoft/winget-cli/tree/master/src/PowerShell/Microsoft.WinGet.Client
 Write-Host '👉 Install Microsoft.WinGet.Client' -ForegroundColor Blue
 Install-MyPSResource -Import Microsoft.WinGet.Client | Out-Host

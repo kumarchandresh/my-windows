@@ -45,6 +45,11 @@ function Install-MyWinGetPackage {
     if (Test-Path $pkgOpt) { $cb += @(                 "--custom '$(Get-Content $pkgOpt)'") }
     else                   { $cb += @('--interactive', "--custom '/log install.log'") }
   }
+  elseif ($pkgType -eq 'inno') {
+    $pkgOpt = "$PSScriptRoot\Option\$Id.inf"
+    if (Test-Path $pkgOpt) { $cb += @(                 "--custom '/LOADINF=`"$pkgOpt`"'") }
+    else                   { $cb += @('--interactive', "--custom '/SAVEINF=`"$pkgOpt`"'") }
+  }
   $cmd = $cb -join ' '
   Write-Host "$(Get-DefaultPrompt)$cmd" -ForegroundColor DarkGray
   Invoke-Expression $cmd
