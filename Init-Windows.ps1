@@ -1,3 +1,7 @@
+# https://stackoverflow.com/a/49481797
+$PSDefaultParameterValues['*:Encoding'] = 'utf8'
+$OutputEncoding = [Console]::OutputEncoding = [Console]::InputEncoding = [Text.UTF8Encoding]::new()
+
 Import-Module -Force "$PSScriptRoot\PowerShell\Modules\MyPSResource"
 Import-Module -Force "$PSScriptRoot\PowerShell\Modules\MyUtil"
 Import-Module -Force "$PSScriptRoot\PowerShell\Modules\MyWinGet"
@@ -29,7 +33,7 @@ if ($PSEdition -ne 'Core') {
 Write-Host '👉 Install PowerShell' -ForegroundColor Blue
 Install-MyWinGetPackage Microsoft.PowerShell; Restore-EnvPath
 
-pwsh -Command ('$env:SelfExecute = $True;' + "& '$PSCommandPath'")
+pwsh -NoProfile -Command ('$env:SelfExecute = $True;' + "& '$PSCommandPath'")
 return
 
 }
@@ -37,5 +41,23 @@ return
 # https://github.com/microsoft/winget-cli/tree/master/src/PowerShell/Microsoft.WinGet.Client
 Write-Host '👉 Install Microsoft.WinGet.Client' -ForegroundColor Blue
 Install-MyPSResource -Import Microsoft.WinGet.Client | Out-Host
+
+# https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_profiles
+Write-Host '👉 Install PowerShell profile' -ForegroundColor Blue
+$profileSourcePath = "$env:USERPROFILE\Documents\PowerShell"
+$profileDestinationPath = "$PSScriptRoot\PowerShell"
+if ((-not (Test-IsSymbolicLink $profileSourcePath)) -and (Test-IsDirectory $profileSourcePath)) {
+  $profileBackupPath = "$profileSourcePath-$(Get-Date -Format 'yyyy.MM.dd')"
+  Write-Host "Backup directory: $profileBackupPath"
+  Move-Item $profileSourcePath $profileBackupPath
+}
+if (Test-IsSymbolicLink $profileSourcePath) {
+  Write-Host "Overwrite exising symlink: $profileDestinationPath" -ForegroundColor DarkGray
+  (Get-Item $profileSourcePath).Delete()
+}
+else {
+  Write-Host "Create new symlink: $profileDestinationPath" -ForegroundColor DarkGray
+}
+New-Item $profileSourcePath -ItemType SymbolicLink -Value $profileDestinationPath
 
 echo "To be continued..."
