@@ -1,3 +1,4 @@
+Import-Module -Force "$PSScriptRoot\PowerShell\Modules\MyPSResource"
 Import-Module -Force "$PSScriptRoot\PowerShell\Modules\MyUtil"
 Import-Module -Force "$PSScriptRoot\PowerShell\Modules\MyWinGet"
 
@@ -32,5 +33,9 @@ pwsh -Command ('$env:SelfExecute = $True;' + "& '$PSCommandPath'")
 return
 
 }
+
+# https://github.com/microsoft/winget-cli/tree/master/src/PowerShell/Microsoft.WinGet.Client
+Write-Host '👉 Install Microsoft.WinGet.Client' -ForegroundColor Blue
+Install-MyPSResource -Import Microsoft.WinGet.Client | Out-Host
 
 echo "To be continued..."
