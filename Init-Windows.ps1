@@ -50,6 +50,10 @@ Install-MyWinGetPackage -Scope Machine Git.Git; Restore-EnvPath
 Write-Host '👉 Install Microsoft.WinGet.Client' -ForegroundColor Blue
 Install-MyPSResource -Import Microsoft.WinGet.Client | Out-Host
 
+# https://github.com/dahlbyk/posh-git
+Write-Host '👉 Install posh-git' -ForegroundColor Blue
+Install-MyPSResource -Import posh-git | Out-Host
+
 # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_profiles
 Write-Host '👉 Install PowerShell profile' -ForegroundColor Blue
 $profileSourcePath = "$env:USERPROFILE\Documents\PowerShell"
