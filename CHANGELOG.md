@@ -7,6 +7,7 @@
 #### Added
 - Add support for *inno* installer.
 - Add **git** for Windows.
+- Add **posh-git**.
 
 ### 5/25/2025
 

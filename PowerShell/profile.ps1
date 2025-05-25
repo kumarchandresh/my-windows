@@ -2,6 +2,7 @@
 $PSDefaultParameterValues['*:Encoding'] = 'utf8'
 $OutputEncoding = [Console]::OutputEncoding = [Console]::InputEncoding = [Text.UTF8Encoding]::new()
 
+Import-Module -Force posh-git
 Import-Module -Force MyUtil
 
 $psGalleryUri = (Get-PSResourceRepository PSGallery).Uri | Select-Object -ExpandProperty AbsoluteUri | Out-String
@@ -37,6 +38,4 @@ function clock {
   "📅 $date $clock $time"
 }
 
-function prompt {
-  "$(Get-Location) $(clock)`n$(if (Test-IsProcessElevated) { '#' } else { '$' }) "
-}
+$GitPromptSettings.DefaultPromptSuffix = ' $(clock)`n$(if (Test-IsProcessElevated) { "#" } else { "$" }) '
