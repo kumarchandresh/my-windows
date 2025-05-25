@@ -9,7 +9,13 @@ function Get-MyWinGetPackage {
     [Parameter(Mandatory)]
     [String] $Id
   )
-  Get-MyWinGetPackages | Where-Object -Property Id -eq $Id
+  if ((Get-Command Get-InstalledPSResource -ErrorAction SilentlyContinue) -and (
+    Get-InstalledPSResource -Scope AllUsers Microsoft.WinGet.Client -ErrorAction SilentlyContinue)) {
+    Get-WinGetPackage -Id $Id
+  }
+  else {
+    Get-MyWinGetPackages | Where-Object -Property Id -eq $Id
+  }
 }
 
 function Install-MyWinGetPackage {
