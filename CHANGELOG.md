@@ -7,6 +7,7 @@
 #### Added
 - Add **Microsoft.WinGet.Client**.
 - Add **PowerShell profile**.
+- Add **Windows Terminal**.
 
 ### 5/24/2025 - Init repo
 

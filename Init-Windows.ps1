@@ -38,6 +38,10 @@ return
 
 }
 
+# https://github.com/microsoft/terminal
+Write-Host '👉 Install Windows Terminal' -ForegroundColor Blue
+Install-MyWinGetPackage -Id Microsoft.WindowsTerminal
+
 # https://github.com/microsoft/winget-cli/tree/master/src/PowerShell/Microsoft.WinGet.Client
 Write-Host '👉 Install Microsoft.WinGet.Client' -ForegroundColor Blue
 Install-MyPSResource -Import Microsoft.WinGet.Client | Out-Host
