@@ -59,6 +59,10 @@ Install-MyPSResource -Import Microsoft.WinGet.Client | Out-Host
 Write-Host '👉 Install posh-git' -ForegroundColor Blue
 Install-MyPSResource -Import posh-git | Out-Host
 
+# https://github.com/devblackops/Terminal-Icons
+Write-Host '👉 Install Terminal-Icons' -ForegroundColor Blue
+Install-MyPSResource -Import Terminal-Icons | Out-Host
+
 # https://www.nerdfonts.com/font-downloads
 Write-Host '👉 Install Cascadia Code Nerd font' -ForegroundColor Blue
 Install-MyNerdFont CascadiaCode -Filter CaskaydiaCoveNerdFont-*.ttf

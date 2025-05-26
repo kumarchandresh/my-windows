@@ -7,6 +7,7 @@
 #### Added
 - Add support for installing *Nerd fonts*.
 - Add **Cascadia Code** Nerd font.
+- Add **Terminal-Icons**.
 
 ### 5/26/2025
 
