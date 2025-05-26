@@ -9,6 +9,7 @@
 - Add **git** for Windows.
 - Add **posh-git**.
 - Add Windows Terminal settings.
+- Add **Visual Studio Code**.
 
 ### 5/25/2025
 
