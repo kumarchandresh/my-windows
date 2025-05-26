@@ -32,7 +32,13 @@
     ],
     "profiles": 
     {
-        "defaults": {},
+        "defaults": 
+        {
+            "font": 
+            {
+                "face": "CaskaydiaCove Nerd Font"
+            }
+        },
         "list": 
         [
             {
