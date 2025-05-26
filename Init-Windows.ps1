@@ -2,6 +2,7 @@
 $PSDefaultParameterValues['*:Encoding'] = 'utf8'
 $OutputEncoding = [Console]::OutputEncoding = [Console]::InputEncoding = [Text.UTF8Encoding]::new()
 
+Import-Module -Force "$PSScriptRoot\PowerShell\Modules\MyFont"
 Import-Module -Force "$PSScriptRoot\PowerShell\Modules\MyPSResource"
 Import-Module -Force "$PSScriptRoot\PowerShell\Modules\MyUtil"
 Import-Module -Force "$PSScriptRoot\PowerShell\Modules\MyWinGet"
@@ -57,6 +58,10 @@ Install-MyPSResource -Import Microsoft.WinGet.Client | Out-Host
 # https://github.com/dahlbyk/posh-git
 Write-Host '👉 Install posh-git' -ForegroundColor Blue
 Install-MyPSResource -Import posh-git | Out-Host
+
+# https://www.nerdfonts.com/font-downloads
+Write-Host '👉 Install Cascadia Code Nerd font' -ForegroundColor Blue
+Install-MyNerdFont CascadiaCode -Filter CaskaydiaCoveNerdFont-*.ttf
 
 # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_profiles
 Write-Host '👉 Install PowerShell profile' -ForegroundColor Blue
