@@ -3,6 +3,7 @@ $PSDefaultParameterValues['*:Encoding'] = 'utf8'
 $OutputEncoding = [Console]::OutputEncoding = [Console]::InputEncoding = [Text.UTF8Encoding]::new()
 
 Import-Module -Force posh-git
+Import-Module -Force Terminal-Icons
 Import-Module -Force MyUtil
 
 $psGalleryUri = (Get-PSResourceRepository PSGallery).Uri | Select-Object -ExpandProperty AbsoluteUri | Out-String
