@@ -59,7 +59,7 @@ Write-Host '👉 Install PowerShell profile' -ForegroundColor Blue
 $profileSourcePath = "$env:USERPROFILE\Documents\PowerShell"
 $profileDestinationPath = "$PSScriptRoot\PowerShell"
 if ((-not (Test-IsSymbolicLink $profileSourcePath)) -and (Test-IsDirectory $profileSourcePath)) {
-  $profileBackupPath = "$profileSourcePath-$(Get-Date -Format 'yyyy.MM.dd')"
+  $profileBackupPath = "$profileSourcePath-$(Get-Date -Format 'yyyy.MM.dd-HH.mm.ss')"
   Write-Host "Backup directory: $profileBackupPath"
   Move-Item $profileSourcePath $profileBackupPath
 }
@@ -71,5 +71,24 @@ else {
   Write-Host "Create new symlink: $profileDestinationPath" -ForegroundColor DarkGray
 }
 New-Item $profileSourcePath -ItemType SymbolicLink -Value $profileDestinationPath
+
+# https://learn.microsoft.com/en-us/windows/terminal/install#configuration
+Write-Host '👉 Install Windows Terminal settings' -ForegroundColor Blue
+$termDir = Get-ChildItem "$env:LocalAppData\Packages" -Filter Microsoft.WindowsTerminal_* | Select-Object -First 1 -ExpandProperty FullName
+$termConfigSourcePath = Join-Path $termDir 'LocalState\settings.json'
+$termConfigDestinationPath = "$PSScriptRoot\Settings\WindowsTerminal\settings.json"
+if ((-not (Test-IsSymbolicLink $termConfigSourcePath)) -and (Test-IsFile $termConfigSourcePath)) {
+  $termConfigBackupPath = "$(Join-Path $termDir 'LocalState\settings')-$(Get-Date -Format 'yyyy.MM.dd-HH.mm.ss').json"
+  Write-Host "Backup settings: $termConfigBackupPath"
+  Move-Item $termConfigSourcePath $termConfigBackupPath
+}
+if (Test-IsSymbolicLink $termConfigSourcePath) {
+  Write-Host "Overwrite exising symlink: $termConfigDestinationPath" -ForegroundColor DarkGray
+  (Get-Item $termConfigSourcePath).Delete()
+}
+else {
+  Write-Host "Create new symlink: $termConfigDestinationPath" -ForegroundColor DarkGray
+}
+New-Item $termConfigSourcePath -ItemType SymbolicLink -Value $termConfigDestinationPath
 
 echo "To be continued..."
