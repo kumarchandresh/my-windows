@@ -69,6 +69,14 @@ Install-MyPSResource -Import Microsoft.WinGet.Client | Out-Host
 Write-Host '👉 Install posh-git' -ForegroundColor Blue
 Install-MyPSResource -Import posh-git | Out-Host
 
+# https://github.com/kelleyma49/PSFzf
+Write-Host '👉 Install PSFzf' -ForegroundColor Blue
+Install-MyPSResource -Import PSFzf | Out-Host
+
+# https://github.com/vors/ZLocation
+Write-Host '👉 Install ZLocation' -ForegroundColor Blue
+Install-MyPSResource -Import ZLocation | Out-Host
+
 # https://github.com/devblackops/Terminal-Icons
 Write-Host '👉 Install Terminal-Icons' -ForegroundColor Blue
 Install-MyPSResource -Import Terminal-Icons | Out-Host

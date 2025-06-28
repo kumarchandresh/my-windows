@@ -5,6 +5,8 @@
 ### 6/28/2025
 
 #### Added
+- Add **ZLocation**.
+- Add **PSFzf**.
 - Add **fzf**.
 
 ### 5/27/2025
