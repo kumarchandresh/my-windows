@@ -85,6 +85,26 @@ Install-MyPSResource -Import Terminal-Icons | Out-Host
 Write-Host '👉 Install Cascadia Code Nerd font' -ForegroundColor Blue
 Install-MyNerdFont CascadiaCode -Filter CaskaydiaCoveNerdFont-*.ttf
 
+# https://github.com/catppuccin/windows-terminal
+Write-Host '👉 Install Catppuccin for Windows Terminal' -ForegroundColor Blue
+$windowsTerminalSettingsPath = "$PSScriptRoot\Settings\WindowsTerminal\settings.json"
+$windowsTerminalSettings = Get-Content $windowsTerminalSettingsPath | ConvertFrom-Json -Depth 69
+Write-Host "Downloading color schemes..."
+$windowsTerminalSettings.schemes = @("frappe", "latte", "macchiato", "mocha") | ForEach-Object {
+  Write-Host $_ -ForegroundColor DarkGray
+  Invoke-WebRequest ("https://raw.githubusercontent.com/catppuccin/windows-terminal/refs/heads/main/$_" + ".json") |
+  Select-Object -ExpandProperty Content |
+  ConvertFrom-Json
+}
+Write-Host "Downloading themes..."
+$windowsTerminalSettings.themes = @("frappe", "latte", "macchiato", "mocha") | ForEach-Object {
+  Write-Host $_ -ForegroundColor DarkGray
+  Invoke-WebRequest ("https://raw.githubusercontent.com/catppuccin/windows-terminal/refs/heads/main/$_" + "Theme.json") |
+  Select-Object -ExpandProperty Content |
+  ConvertFrom-Json
+}
+$windowsTerminalSettings | ConvertTo-Json -Depth 69 | Out-File $windowsTerminalSettingsPath
+
 # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_profiles
 Write-Host '👉 Install PowerShell profile' -ForegroundColor Blue
 $profileSourcePath = "$env:USERPROFILE\Documents\PowerShell"

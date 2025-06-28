@@ -2,6 +2,11 @@
 
 📝 ***Note to self**, document the changes so that you can remember what you changed and why.*
 
+### 6/29/2025
+
+#### Added
+- Add **Catppuccin** for Windows Terminal.
+
 ### 6/28/2025
 
 #### Added
