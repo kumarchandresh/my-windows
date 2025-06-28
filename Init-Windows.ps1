@@ -43,13 +43,23 @@ return
 Write-Host '👉 Install Windows Terminal' -ForegroundColor Blue
 Install-MyWinGetPackage Microsoft.WindowsTerminal
 
-# https://gitforwindows.org/
+# https://gitforwindows.org
 Write-Host '👉 Install Git for Windows' -ForegroundColor Blue
 Install-MyWinGetPackage -Scope Machine Git.Git; Restore-EnvPath
+
+# https://junegunn.github.io/fzf
+Write-Host '[+] Install "fzf"' -ForegroundColor Magenta
+Install-MyWinGetPackage -Scope Machine junegunn.fzf; Restore-EnvPath
 
 # https://aka.ms/vscode
 Write-Host '👉 Install Visual Studio Code' -ForegroundColor Blue
 Install-MyWinGetPackage -Scope Machine Microsoft.VisualStudioCode
+
+$psGalleryUri = (Get-PSResourceRepository PSGallery).Uri | Select-Object -ExpandProperty AbsoluteUri | Out-String
+if ($psGalleryUri -match 'www\.powershellgallery\.com' -and (-not (Get-PSResourceRepository PSGallery).Trusted)) {
+  Write-Host 'Set PSGallery as Trusted'
+  Set-PSResourceRepository PSGallery -Trusted
+}
 
 # https://github.com/microsoft/winget-cli/tree/master/src/PowerShell/Microsoft.WinGet.Client
 Write-Host '👉 Install Microsoft.WinGet.Client' -ForegroundColor Blue
@@ -103,5 +113,3 @@ else {
   Write-Host "Create new symlink: $termConfigDestinationPath" -ForegroundColor DarkGray
 }
 New-Item $termConfigSourcePath -ItemType SymbolicLink -Value $termConfigDestinationPath
-
-echo "To be continued..."

@@ -4,17 +4,11 @@ $OutputEncoding = [Console]::OutputEncoding = [Console]::InputEncoding = [Text.U
 
 Import-Module -Force posh-git
 Import-Module -Force Terminal-Icons
-Import-Module -Force MyUtil
-
-$psGalleryUri = (Get-PSResourceRepository PSGallery).Uri | Select-Object -ExpandProperty AbsoluteUri | Out-String
-if ($psGalleryUri -match 'www\.powershellgallery\.com' -and (-not (Get-PSResourceRepository PSGallery).Trusted)) {
-  Write-Host 'Set PSGallery as Trusted'
-  Set-PSResourceRepository PSGallery -Trusted
-}
 
 function which {
   (Get-Command $args -CommandType Application, ExternalScript -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty Source) -replace [Regex]::Escape($env:USERPROFILE), '~'
 }
+
 function clock {
   $clockEmojiMap = @{
     "🕛" =  0.0;    "🕧" =  0.5;

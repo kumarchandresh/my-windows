@@ -17,6 +17,6 @@ function Install-MyPSResource {
     Install-PSResource -Repository $Repository -TrustRepository -Scope AllUsers $Name
   }
   if ($Import) {
-    Import-Module $Name -PassThru
+    Import-Module -Force $Name -PassThru
   }
 }
