@@ -5,6 +5,7 @@
 ### 6/29/2025
 
 #### Added
+- Add **Catppuccin** for PowerShell.
 - Add **Catppuccin** for Windows Terminal.
 
 ### 6/28/2025

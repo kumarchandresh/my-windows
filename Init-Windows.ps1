@@ -1,6 +1,7 @@
 # https://stackoverflow.com/a/49481797
 $PSDefaultParameterValues['*:Encoding'] = 'utf8'
 $OutputEncoding = [Console]::OutputEncoding = [Console]::InputEncoding = [Text.UTF8Encoding]::new()
+$PSModulePath = Join-Path $env:ProgramFiles "PowerShell\Modules"
 
 Import-Module -Force "$PSScriptRoot\PowerShell\Modules\MyFont"
 Import-Module -Force "$PSScriptRoot\PowerShell\Modules\MyPSResource"
@@ -85,6 +86,13 @@ Install-MyPSResource -Import Terminal-Icons | Out-Host
 Write-Host '👉 Install Cascadia Code Nerd font' -ForegroundColor Blue
 Install-MyNerdFont CascadiaCode -Filter CaskaydiaCoveNerdFont-*.ttf
 
+# https://github.com/catppuccin/powershell
+Write-Host '👉 Install Catppuccin for PowerShell' -ForegroundColor Blue
+Install-MyPSResourceFromGitHub -Uri "https://github.com/catppuccin/powershell/archive/refs/heads/main.zip" `
+                               -OutFile "Catppuccin.zip" `
+                               -Root "powershell-main" `
+                               -Destination "$PSModulePath\Catppuccin" `
+
 # https://github.com/catppuccin/windows-terminal
 Write-Host '👉 Install Catppuccin for Windows Terminal' -ForegroundColor Blue
 $windowsTerminalSettingsPath = "$PSScriptRoot\Settings\WindowsTerminal\settings.json"
@@ -115,7 +123,7 @@ if ((-not (Test-IsSymbolicLink $profileSourcePath)) -and (Test-IsDirectory $prof
   Move-Item $profileSourcePath $profileBackupPath
 }
 if (Test-IsSymbolicLink $profileSourcePath) {
-  Write-Host "Overwrite exising symlink: $profileDestinationPath" -ForegroundColor DarkGray
+  Write-Host "Overwrite existing symlink: $profileDestinationPath" -ForegroundColor DarkGray
   (Get-Item $profileSourcePath).Delete()
 }
 else {
@@ -134,7 +142,7 @@ if ((-not (Test-IsSymbolicLink $termConfigSourcePath)) -and (Test-IsFile $termCo
   Move-Item $termConfigSourcePath $termConfigBackupPath
 }
 if (Test-IsSymbolicLink $termConfigSourcePath) {
-  Write-Host "Overwrite exising symlink: $termConfigDestinationPath" -ForegroundColor DarkGray
+  Write-Host "Overwrite existing symlink: $termConfigDestinationPath" -ForegroundColor DarkGray
   (Get-Item $termConfigSourcePath).Delete()
 }
 else {

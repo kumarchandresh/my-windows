@@ -5,9 +5,30 @@ $OutputEncoding = [Console]::OutputEncoding = [Console]::InputEncoding = [Text.U
 Import-Module -Force posh-git
 Import-Module -Force PSFzf
 Import-Module -Force ZLocation
+Import-Module -Force Catppuccin
 Import-Module -Force Terminal-Icons
 
 Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
+
+# https://github.com/catppuccin/powershell?tab=readme-ov-file#profile-usage
+$Flavor = $Catppuccin['Frappe']
+# The following colors are used by PowerShell's formatting
+# Again PS 7.2+ only
+$PSStyle.Formatting.Debug = $Flavor.Sky.Foreground()
+$PSStyle.Formatting.Error = $Flavor.Red.Foreground()
+$PSStyle.Formatting.ErrorAccent = $Flavor.Blue.Foreground()
+$PSStyle.Formatting.FormatAccent = $Flavor.Teal.Foreground()
+$PSStyle.Formatting.TableHeader = $Flavor.Rosewater.Foreground()
+$PSStyle.Formatting.Verbose = $Flavor.Yellow.Foreground()
+$PSStyle.Formatting.Warning = $Flavor.Peach.Foreground()
+# Modified from the official Catppuccin fzf configuration at: https://github.com/catppuccin/fzf/
+$env:FZF_DEFAULT_OPTS = @"
+--color=bg+:$($Flavor.Surface0),bg:$($Flavor.Base),spinner:$($Flavor.Rosewater)
+--color=hl:$($Flavor.Red),fg:$($Flavor.Text),header:$($Flavor.Red)
+--color=info:$($Flavor.Mauve),pointer:$($Flavor.Rosewater),marker:$($Flavor.Rosewater)
+--color=fg+:$($Flavor.Text),prompt:$($Flavor.Mauve),hl+:$($Flavor.Red)
+--color=border:$($Flavor.Surface2)
+"@
 
 function which {
   (

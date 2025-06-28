@@ -51,6 +51,6 @@ function Install-MyWinGetPackage {
     else                   { $cb += @('--interactive', "--custom '/SAVEINF=`"$pkgOpt`"'") }
   }
   $cmd = $cb -join ' '
-  Write-Host "$(Get-DefaultPrompt)$cmd" -ForegroundColor DarkGray
+  Write-Host $cmd -ForegroundColor DarkGray
   Invoke-Expression $cmd
 }
