@@ -48,9 +48,13 @@ Install-MyWinGetPackage Microsoft.WindowsTerminal
 Write-Host '👉 Install Git for Windows' -ForegroundColor Blue
 Install-MyWinGetPackage -Scope Machine Git.Git; Restore-EnvPath
 
-# https://junegunn.github.io/fzf
-Write-Host '[+] Install "fzf"' -ForegroundColor Magenta
-Install-MyWinGetPackage -Scope Machine junegunn.fzf; Restore-EnvPath
+# https://github.com/junegunn/fzf
+Write-Host '👉 Install "junegunn/fzf"' -ForegroundColor Magenta
+Install-MyWinGetPackage junegunn.fzf
+
+# https://github.com/ajeetdsouza/zoxide
+Write-Host '👉 Install "ajeetdsouza/zoxide"' -ForegroundColor Magenta
+Install-MyWinGetPackage ajeetdsouza.zoxide
 
 # https://aka.ms/vscode
 Write-Host '👉 Install Visual Studio Code' -ForegroundColor Blue
@@ -69,14 +73,6 @@ Install-MyPSResource -Import Microsoft.WinGet.Client | Out-Host
 # https://github.com/dahlbyk/posh-git
 Write-Host '👉 Install posh-git' -ForegroundColor Blue
 Install-MyPSResource -Import posh-git | Out-Host
-
-# https://github.com/kelleyma49/PSFzf
-Write-Host '👉 Install PSFzf' -ForegroundColor Blue
-Install-MyPSResource -Import PSFzf | Out-Host
-
-# https://github.com/vors/ZLocation
-Write-Host '👉 Install ZLocation' -ForegroundColor Blue
-Install-MyPSResource -Import ZLocation | Out-Host
 
 # https://github.com/devblackops/Terminal-Icons
 Write-Host '👉 Install Terminal-Icons' -ForegroundColor Blue

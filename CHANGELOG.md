@@ -2,6 +2,17 @@
 
 📝 ***Note to self**, document the changes so that you can remember what you changed and why.*
 
+### 7/3/2025
+
+#### Added
+- Alias `cd` to become smarter.
+- Add `Set-FzfLocation` as better alternative to the default `z` command from **zoxide**.
+- Add **zoxide**.
+
+#### Removed
+- Remove **ZLocation**.
+- Remove **PSFzf**.
+
 ### 6/29/2025
 
 #### Added
